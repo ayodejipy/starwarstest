@@ -27,6 +27,13 @@ export default function MovieHero() {
         // console.log({dd})
     }
     
+    const handleChange = async (e) => {
+        e.preventDefault();
+        const { value } = e.target;
+        setSelected(parseInt(value) + 1)
+        // await getMovies(selected);
+    }
+    
     useEffect(() => {
         const getData = async () => {
             await getMovies();
@@ -40,7 +47,7 @@ export default function MovieHero() {
         <>
             <Wrapper>
                 <Content>
-                    <select name="movies" onChange={(e) => setSelected(parseInt(e.target.value) + 1)}>
+                    <select name="movies" onChange={handleChange}>
                         <option value=""> Select movie </option>
                         { movies && movies.sort((a, d) => d.created - a.created).map((movie, index) => {
                             return <option key={index} value={index}>{movie.title}</option>                        
