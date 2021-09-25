@@ -55,11 +55,37 @@ export default function Movie({ movieId }) {
         }
     }
     
+    const TotalCharacters = () => {
+        if(gender) {
+            return characters.character.filter(a => a.gender == gender ).length
+        }
+        return characters.character.length
+    }
+    
     const heightSum = (heights) => {
         const reducer = (prev, next) => parseInt(prev) + parseInt(next);
-        let total = heights.reduce(reducer, 0)
+        if(gender) {
+            // filter through character and only return height
+            let total = characters.character.filter(a => a.gender == gender ).map((h) => h.height )
+            total = total.reduce(reducer, 0)
+            // console.log({total})
+            return total
+        }
+        let total = characters.height.reduce(reducer, 0)
         console.log({total})
         return total;
+    }
+    
+    const convertHeight = () => {
+        // console.log(heightSum(characters.height))
+        
+        let height = heightSum(characters.height)
+        let cm2feet = 0.03281
+        let inch = 12
+        
+        let feet = Math.ceil(height * cm2feet);
+        return `${feet}ft`
+         
     }
     // const getCharacters = async () => {
     //     setLoading(true) 
@@ -127,8 +153,11 @@ export default function Movie({ movieId }) {
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <td colSpan="2"> Total Characters: {characters.character.length}</td>
-                                    <td>{ heightSum(characters.height) }</td>
+                                    <td colSpan="2"> Total Characters: {TotalCharacters()}</td>
+                                    <td>
+                                        <p>{`${heightSum(characters.height)}cm - (${convertHeight()}/)` }</p>
+                                        <p>Height(ft/in): { convertHeight() }</p>
+                                    </td>
                                 </tr>
                             </tfoot>
                         </table>                
