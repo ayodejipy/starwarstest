@@ -2,17 +2,17 @@ import { useState, useMemo } from 'react'
 
 export const useSortedTable = (data, config = null, ) => {
     const [sortConfig, setSortConfig] = useState(config)
-    const [sortedTable, setSortedTable] = useState([])
+    // const [sortedTable, setSortedTable] = useState([])
     
     
     const sortedData = useMemo(() => {
         // create a copy of our character
-        setSortedTable([...data]) 
-        // let sorted = [...data];
-        // console.log({sorted})
+        // setSortedTable([...data]) 
+        let sortedItems = [...data];
+        console.log({sortedItems})
         
         if(sortConfig !== null ) {
-            sortedTable.sort((a, b) => {
+            sortedItems.sort((a, b) => {
                 if(a[sortConfig.key] < b[sortConfig.key]) {
                     return sortConfig.direction === 'ascending' ? -1 : 1 // returns negative because arg a's name comes before arg b's name
                 } 
@@ -22,7 +22,7 @@ export const useSortedTable = (data, config = null, ) => {
                 return 0 // both have the same name
             })
         }
-        return sortedTable
+        return sortedItems
         
     }, [sortConfig, data])
     

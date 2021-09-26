@@ -41,8 +41,8 @@ export default function Movie({ movieId }) {
                     height.push(data.height)
                     setCharacters(chars => ({
                         ...characters,
-                        character: people,
-                        height: height
+                        character: [...people],
+                        height: [...height]
                     }))
                 })
             });

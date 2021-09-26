@@ -7,6 +7,11 @@ export default function Table({ gender, characters }) {
     
     console.log({data})
     
+    const getClassNamesFor = name => {
+        if(!sortConfig) return ;
+        return sortConfig.key === name ? sortConfig.direction : undefined
+    }
+    
     const TotalCharacters = () => {
         if(gender) {
             return characters.character.filter(a => a.gender == gender ).length
@@ -48,14 +53,18 @@ export default function Table({ gender, characters }) {
             <thead>
                 <tr>
                     <th>
-                        <button type="button" onDoubleClick={() => requestSort('name')}>Name</button>
+                        <button type="button" className={getClassNamesFor('name')} onDoubleClick={() => requestSort('name')}>Name</button>
                     </th>
-                    <th><button type="button" onDoubleClick={() => requestSort('gender')}>Gender</button></th>
-                    <th><button type="button" onDoubleClick={() => requestSort('height')}>Height(cm)</button></th>
+                    <th>
+                        <button type="button" className={getClassNamesFor('gender')} onDoubleClick={() => requestSort('gender')}>Gender</button>
+                    </th>
+                    <th>
+                        <button type="button" className={getClassNamesFor('height')} onDoubleClick={() => requestSort('height')}>Height(cm)</button>
+                    </th>
                 </tr>
             </thead>
             <tbody>
-                { (data && gender )
+                { gender
                     ? data.filter(a => a.gender == gender).map((character, i) => {
                             return <Characters key={i} people={character} />
                         })
