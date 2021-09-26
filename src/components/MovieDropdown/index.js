@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import API from '../../API'
-import { Content, Wrapper } from './MovieHero.styles'
+import { Content, Wrapper } from './MovieDropdown.styles'
 // components
 import Movie from '../Movie'
 
@@ -12,7 +12,7 @@ import Movie from '../Movie'
 //     results: [],
 // }
 
-export default function MovieHero() {
+export default function MovieDropdown() {
     const [movies, setMovies] = useState([])
     const [loading, setLoading] = useState(false)
     const [selected, setSelected ] = useState('')

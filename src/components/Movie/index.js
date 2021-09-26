@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react'
 import API from '../../API';
 // style
 import { Wrapper } from './Movie.styles';
-
-import Characters from '../Characters';
+// Component
+import Table from '../Table';
 
 export default function Movie({ movieId }) {
     const [movie, setMovie] = useState([]);
@@ -55,38 +55,7 @@ export default function Movie({ movieId }) {
         }
     }
     
-    const TotalCharacters = () => {
-        if(gender) {
-            return characters.character.filter(a => a.gender == gender ).length
-        }
-        return characters.character.length
-    }
     
-    const heightSum = (heights) => {
-        const reducer = (prev, next) => parseInt(prev) + parseInt(next);
-        if(gender) {
-            // filter through character and only return height
-            let total = characters.character.filter(a => a.gender == gender ).map((h) => h.height )
-            total = total.reduce(reducer, 0)
-            // console.log({total})
-            return total
-        }
-        let total = characters.height.reduce(reducer, 0)
-        console.log({total})
-        return total;
-    }
-    
-    const convertHeight = () => {
-        // console.log(heightSum(characters.height))
-        
-        let height = heightSum(characters.height)
-        let cm2feet = 0.03281
-        let inch = 12
-        
-        let feet = Math.ceil(height * cm2feet);
-        return `${feet}ft`
-         
-    }
     // const getCharacters = async () => {
     //     setLoading(true) 
     //     try {
@@ -133,34 +102,7 @@ export default function Movie({ movieId }) {
                             <option value="female"> Female </option>
                         </select>
                         
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Gender</th>
-                                    <th>Height(cm)</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                { gender 
-                                    ? characters.character.filter(a => a.gender == gender).map((character, i) => {
-                                            return <Characters key={i} people={character} />
-                                        })
-                                    : characters.character.map((character, i) => {
-                                        return <Characters key={i} people={character} />
-                                    })
-                                }
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <td colSpan="2"> Total Characters: {TotalCharacters()}</td>
-                                    <td>
-                                        <p>{`${heightSum(characters.height)}cm - (${convertHeight()}/)` }</p>
-                                        <p>Height(ft/in): { convertHeight() }</p>
-                                    </td>
-                                </tr>
-                            </tfoot>
-                        </table>                
+                        <Table gender={gender} characters={characters} />              
                     </div> 
                 </>                
             )}

@@ -12,6 +12,7 @@ export const Wrapper = styled.div`
         
         p {
             display: inline-block;
+            color: #fcdf2b;
             animation: animatecrawl 7s linear infinite;
             
             @keyframes animatecrawl {
@@ -54,7 +55,7 @@ export const Wrapper = styled.div`
             
             td, th {
                 padding: 10px;
-                border: 1px solid #dddddd;
+                border: 1px solid #fcdf2b;
             }
         }
     }

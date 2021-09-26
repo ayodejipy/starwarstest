@@ -4,7 +4,7 @@ import Starwars from '../Images/star-wars-logo-983.png'
 import { Wrapper, Logo } from './Home.styles'
 
 // component
-import MovieHero from './MovieHero'
+import MovieHero from './MovieDropdown'
 
 export default function Home() {
     return (
