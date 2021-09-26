@@ -1,7 +1,11 @@
 import React from 'react'
 import Characters from './Characters'
+import { useSortedTable } from '../hooks/useSortedTable'
 
 export default function Table({ gender, characters }) {
+    const { data, requestSort, sortConfig } = useSortedTable(characters.character);
+    
+    console.log({data})
     
     const TotalCharacters = () => {
         if(gender) {
@@ -43,17 +47,19 @@ export default function Table({ gender, characters }) {
         <table>
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Gender</th>
-                    <th>Height(cm)</th>
+                    <th>
+                        <button type="button" onDoubleClick={() => requestSort('name')}>Name</button>
+                    </th>
+                    <th><button type="button" onDoubleClick={() => requestSort('gender')}>Gender</button></th>
+                    <th><button type="button" onDoubleClick={() => requestSort('height')}>Height(cm)</button></th>
                 </tr>
             </thead>
             <tbody>
-                { gender 
-                    ? characters.character.filter(a => a.gender == gender).map((character, i) => {
+                { (data && gender )
+                    ? data.filter(a => a.gender == gender).map((character, i) => {
                             return <Characters key={i} people={character} />
                         })
-                    : characters.character.map((character, i) => {
+                    : data.map((character, i) => {
                         return <Characters key={i} people={character} />
                     })
                 }

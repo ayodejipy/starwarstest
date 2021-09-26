@@ -51,6 +51,28 @@ export const Wrapper = styled.div`
             width: 100%;
             border-collapse: collapse;
             
+            thead button {
+                border: 0;
+                border-radius: none;
+                font-family: inherit;
+                font-weight: 700;
+                font-size: inherit;
+                padding: 0.5em;
+                margin-bottom: 1px;
+            }
+
+            thead button.ascending::after {
+                content: '👇';
+                display: inline-block;
+                margin-left: 1em;
+            }
+
+            thead button.descending::after {
+                content: '☝️';
+                display: inline-block;
+                margin-left: 1em;
+            }
+            
             th { text-align: left }
             
             td, th {
